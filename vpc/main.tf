@@ -16,7 +16,23 @@ resource "aws_vpc" "main_vpc" {
 resource "aws_internet_gateway" "igw" {
   vpc_id = aws_vpc.main_vpc.id
 
-  tags = {
-    Name = var.gateway_name
-  }
+  tags = var.tags
+}
+
+resource "aws_subnet" "public_subnet" {
+  vpc_id = aws_vpc.main_vpc.id
+  cidr_block = "calcular cidr block correspondiente"
+  tags = var.tags
+}
+
+resource "aws_subnet" "rds_subnet" {
+  vpc_id = aws_vpc.main_vpc.id
+  cidr_block = "calcular cidr block correspondiente"
+  tags = var.tags
+}
+
+resource "aws_subnet" "private_subnet" {
+  vpc_id = aws_vpc.main_vpc.id
+  cidr_block = "calcular cidr block correspondiente"
+  tags = var.tags
 }
