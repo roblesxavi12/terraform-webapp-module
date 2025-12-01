@@ -28,3 +28,7 @@ variable "max_allocated_storage" {
     type = number
     default = 20
 }
+
+variable "rds_subnets" {
+    value = list(string)
+}

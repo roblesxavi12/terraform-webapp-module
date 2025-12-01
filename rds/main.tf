@@ -13,6 +13,14 @@ data "aws_rds_engine_version" "default" {
     engine = var.engine
 }
 
+resource "aws_db_subnet_group" "db_sn_group" {
+  name       = "main"
+  subnet_ids = var.rds_subnets
+  tags = {
+    Name = "My DB subnet group"
+  }
+}
+
 # https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/db_instance
 resource "aws_db_instance" "web_db" {
     allocated_storage = var.allocated_storage
@@ -23,4 +31,5 @@ resource "aws_db_instance" "web_db" {
     engine = data.aws_rds_engine_version.engine
     username = var.username
     password = var.passwd
+    aws_db_subnet_group = aws_db_subnet_group.db_sn_group.name
 }
